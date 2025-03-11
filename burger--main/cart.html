@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Berger Hut</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000; /* Changed background color to black */
+            color: #ffffff; /* Changed text color to white for contrast */
+            margin: 0; /* Reset default margin */
+        }
+        header {
+            background-color: #000000; /* Header background color */
+            padding: 10px 20px; /* Padding for the header */
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex; /* Horizontal layout */
+            justify-content: space-around; /* Space between items */
+        }
+        nav ul li {
+            margin: 0; /* Reset margin */
+        }
+        nav ul li a {
+            color: white; /* Link color */
+            text-decoration: none; /* Remove underline */
+            font-weight: bold; /* Bold text */
+        }
+        nav ul li a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+        .cart-container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto; /* Center with margin */
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #333; /* Changed cart background color for contrast */
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1); /* Slightly lighter shadow */
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 15px 0;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+        li:hover {
+            transform: scale(1.02);
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+        }
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        input[type="number"] {
+            width: 50px;
+            text-align: center;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .summary {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="reservations.html">Reservations</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="cart-container">
+        <h2>Your Cart Items</h2>
+        <ul id="cart-list"></ul>
+        <p class="summary" id="total-price">Total: $0.00</p>
+        <div class="action-buttons">
+            <button onclick="clearCart()">Clear Cart</button>
+            <button onclick="placeOrder()">Place Order</button>
+        </div>
+    </div>
+
+    <script>
+        function displayCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartList = document.getElementById('cart-list');
+            const totalPriceElement = document.getElementById('total-price');
+            let total = 0;
+
+            cartList.innerHTML = '';
+            cart.forEach((item, index) => {
+                const listItem = document.createElement('li');
+                
+                // Cart Item Display
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.className = 'cart-item';
+                
+                const itemImage = document.createElement('img');
+                itemImage.src = item.imageUrl || 'default.jpg'; // Set a default image if `imageUrl` is not present
+                itemImage.alt = item.name;
+
+                const itemText = document.createElement('span');
+                itemText.textContent = `${item.name} - $${item.price.toFixed(2)} (Qty: ${item.quantity})`;
+                
+                cartItemDiv.appendChild(itemImage);
+                cartItemDiv.appendChild(itemText);
+                
+                // Quantity Control
+                const cartItemControls = document.createElement('div');
+                cartItemControls.className = 'cart-item-controls';
+
+                const quantityInput = document.createElement('input');
+                quantityInput.type = 'number';
+                quantityInput.value = item.quantity;
+                quantityInput.min = 1;
+                quantityInput.addEventListener('change', (e) => updateQuantity(index, e.target.value));
+
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remove';
+                removeButton.onclick = () => removeFromCart(index);
+
+                cartItemControls.appendChild(quantityInput);
+                cartItemControls.appendChild(removeButton);
+
+                listItem.appendChild(cartItemDiv);
+                listItem.appendChild(cartItemControls);
+                cartList.appendChild(listItem);
+                
+                total += item.price * item.quantity;
+            });
+
+            totalPriceElement.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        function updateQuantity(index, newQuantity) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (newQuantity < 1) return;
+            cart[index].quantity = parseInt(newQuantity, 10);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+        function removeFromCart(index) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+        function clearCart() {
+            localStorage.removeItem('cart');
+            displayCart();
+            alert("Cart cleared!");
+        }
+
+        function placeOrder() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert("Your cart is empty! Please add items to place an order.");
+                return;
+            }
+            // You can enhance the order process further here
+            alert("Proceeding to checkout...");
+            window.location.href = 'checkout.html';
+        }
+
+        // Display the cart on page load
+        displayCart();
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Berger Hut</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f8fa;
+            color: #fff;
+            text-align: center;
+        }
+        .checkout-container {
+            margin: 100px auto;
+            padding: 50px; /* Adjusted padding for better alignment */
+            width: 50%;
+            background-color: #fff;
+            color: #010000;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: none; /* Hide the container initially */
+        }
+        .cooking-animation {
+            margin: 320px auto; /* Adjusted margin for better alignment */
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .chef-video {
+            width: 600px; /* Increased width of the video */
+            height: auto; /* Maintain aspect ratio */
+            position: absolute;
+            animation: cookAnimation 10s forwards; /* Animation duration */
+        }
+        @keyframes cookAnimation {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-30px); /* Move up during animation */
+                opacity: 0; /* Fade out */
+            }
+        }
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px; /* Could be more or less, depending on screen size */
+            text-align: center; /* Center text */
+            border-radius: 5px; /* Rounded corners */
+            color: black; /* Change text color to black */
+        }
+        .tick {
+            font-size: 100px; /* Adjust size as needed */
+            color: green;
+            display: none; /* Hidden by default */
+            margin: 50px auto; /* Center the tick */
+            border-radius: 50%; /* Make it round */
+            background-color: white; /* Background color of the tick */
+            width: 150px; /* Width for round shape */
+            height: 150px; /* Height for round shape */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for a floating effect */
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cooking Animation with Chef Video -->
+    <div id="cooking-animation" class="cooking-animation">
+        <video src="Chef cooking.mp4" alt="Chef Cooking" class="chef-video" id="chef-video" autoplay muted></video> <!-- Add your chef video here -->
+    </div>
+
+    <!-- Tick Mark -->
+    <div class="tick" id="tick">&#10004;</div> <!-- Unicode for tick mark -->
+
+    <!-- Modal for Confirmation -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirm Your Order</h2>
+            <p>Thank you for shopping at Berger Hut!</p>
+            <p>Click the button below to confirm your order.</p>
+            <button onclick="confirmOrder()">Confirm Order</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // Show animation on page load
+        window.onload = function() {
+            const videoElement = document.getElementById('chef-video');
+
+            // Play the video for 4 seconds
+            setTimeout(() => {
+                videoElement.pause(); // Pause the video
+                videoElement.style.opacity = '0'; // Start fade out for the chef video
+                setTimeout(() => {
+                    document.getElementById('cooking-animation').style.display = 'none'; // Hide cooking animation
+                    showTick(); // Show tick mark
+                }, 2000); // Wait for fade-out effect to complete
+            }, 4000); // Duration to show the cooking animation (4 seconds)
+        };
+
+        function showTick() {
+            const tickElement = document.getElementById('tick');
+            tickElement.style.display = 'flex'; // Show tick mark and center it
+            setTimeout(() => {
+                tickElement.style.display = 'none'; // Hide tick mark after 1 second
+                document.getElementById('myModal').style.display = 'block'; // Show modal
+            }, 1000); // Wait for 1 second before showing modal
+        }
+
+        function confirmOrder() {
+            alert("Your order has been placed successfully!");
+            localStorage.removeItem('cart'); // Clear the cart
+            window.location.href = 'menu.html'; // Redirect to index.html
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none'; // Hide modal
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = 'none'; // Hide modal
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berger Hut - Menu</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        /* Add your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5eded;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #010000;
+            color: white;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .menu {
+            padding: 20px;
+        }
+        .search-container {
+            text-align: right; /* Aligns the search bar to the right */
+            margin-bottom: 20px;
+        }
+        .menu-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Space between menu items */
+        }
+        .menu-item {
+            background: rgb(6, 5, 5);
+            border: 1px solid #ddd; /* Added border for better visibility */
+            padding: 10px;
+            border-radius: 5px; /* Rounded corners */
+            flex: 1 1 30%; /* Responsive design */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Add shadow */
+            transition: transform 0.2s; /* Add transition */
+        }
+        .menu-item:hover {
+            transform: scale(1.05); /* Scale on hover */
+        }
+        .cart {
+            border: 1px solid #010101;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .footer {
+            background-color: #040202;
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+        button {
+            padding: 5px 10px;
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer on hover */
+        }
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+        input[type="number"] {
+            width: 50px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="iconlogo.png" alt="Berger Hut Logo" style="width: 50px; height: 50px;">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="reservations.html">Reservations</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Menu Section -->
+    <section class="menu">
+        <h2>Our Menu</h2>
+        <p>Explore our variety of burgers, fries, and more!</p>
+        
+        <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Search menu items..." oninput="filterMenu()" style="padding: 10px; width: 300px;">
+        </div>
+        <div class="menu-items" id="menu-items">
+            <!-- Sample Menu Items -->
+            <div class="menu-item">
+                <img src="burger1.jpg" alt="Spaghetti Bolognese" style="width: 100%; border-radius: 5px;">
+                <h3>Spaghetti Bolognese</h3>
+                <p>Delicious spaghetti with a rich meat sauce.</p>
+                <p>Price: $10</p>
+                <label for="qty1">Quantity:</label>
+                <input type="number" id="qty1" value="1" min="1" />
+                <button onclick="addToCart('Spaghetti Bolognese', 10, document.getElementById('qty1').value)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="burger2.jpg" alt="Grilled Chicken Salad" style="width: 100%; border-radius: 5px;">
+                <h3>Grilled Chicken Salad</h3>
+                <p>Fresh salad topped with grilled chicken and vinaigrette.</p>
+                <p>Price: $8</p>
+                <label for="qty2">Quantity:</label>
+                <input type="number" id="qty2" value="1" min="1" />
+                <button onclick="addToCart('Grilled Chicken Salad', 8, document.getElementById('qty2').value)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="Chocolate Lava Cake.jpeg" alt="Chocolate Lava Cake" style="width: 100%; border-radius: 5px;">
+                <h3>Chocolate Lava Cake</h3>
+                <p>Decadent chocolate cake with a molten center.</p>
+                <p>Price: $5</p>
+                <label for="qty3">Quantity:</label>
+                <input type="number" id="qty3" value="1" min="1" />
+                <button onclick="addToCart('Chocolate Lava Cake', 5, document.getElementById('qty3').value)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="log1.jpeg" alt="Worcas cheesecake" style="width: 100%; border-radius: 5px;">
+                <h3>Worcas cheesecake</h3>
+                <p>Unique savory cheesecake delight!</p>
+                <p>Price: $8</p>
+                <label for="qty4">Quantity:</label>
+                <input type="number" id="qty4" value="1" min="1" />
+                <button onclick="addToCart('Worcas cheesecake', 8, document.getElementById('qty4').value)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="log2.jpeg" alt="Brownie" style="width: 100%; border-radius: 5px;">
+                <h3>Brownie</h3>
+                <p>Decadent molten chocolate bliss!</p>
+                <p>Price: $8</p>
+                <label for="qty5">Quantity:</label>
+                <input type="number" id="qty5" value="1" min="1" />
+                <button onclick="addToCart('Brownie', 8, document.getElementById('qty5').value)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="log3.jpeg" alt="Apple pie" style="width: 100%; border-radius: 5px;">
+                <h3>Apple pie</h3>
+                <p>Classic warm fruit indulgence!</p>
+                <p>Price: $8</p>
+                <label for="qty6">Quantity:</label>
+                <input type="number" id="qty6" value="1" min="1" />
+                <button onclick="addToCart('Apple pie', 8, document.getElementById('qty6').value)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="log4.jpeg" alt="Ice Cream Sundae" style="width: 100%; border-radius: 5px;">
+                <h3>Ice Cream Sundae</h3>
+                <p>Delicious layered frozen treat!</p>
+                <p>Price: $8</p>
+                <label for="qty7">Quantity:</label>
+                <input type="number" id="qty7" value="1" min="1" />
+                <button onclick="addToCart('Ice Cream Sundae', 8, document.getElementById('qty7').value)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="log6.jpeg" alt="Mango Tarts" style="width: 100%; border-radius: 5px;">
+                <h3>Mango Tarts</h3>
+                <p>Tropical fruit pastry bliss!</p>
+                <p>Price: $8</p>
+                <label for="qty8">Quantity:</label>
+                <input type="number" id="qty8" value="1" min="1" />
+                <button onclick="addToCart('Mango Tarts', 8, document.getElementById('qty8').value)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="log7.jpeg" alt="Chocolate Fudge" style="width: 100%; border-radius: 5px;">
+                <h3>Chocolate Fudge</h3>
+                <p>Chocolate richness in every bite!</p>
+                <p>Price: $8</p>
+                <label for="qty9">Quantity:</label>
+                <input type="number" id="qty9" value="1" min="1" />
+                <button onclick="addToCart('Chocolate Fudge', 8, document.getElementById('qty9').value)">Add to Cart</button>
+            </div>
+        </div>
+        
+        <div class="cart">
+            <h3>Your Cart</h3>
+            <ul id="cart-list"></ul>
+            <p id="total-price">Total: $0.00</p>
+            <button onclick="checkout()">Checkout</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Berger Hut. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        let cart = [];
+        
+        function addToCart(itemName, itemPrice, quantity) {
+            const itemTotal = itemPrice * quantity;
+            cart.push({ name: itemName, price: itemPrice, quantity: quantity });
+            updateCart();
+            alert(`${itemName} added to cart!`);
+        }
+        
+        function updateCart() {
+            const cartList = document.getElementById('cart-list');
+            const totalPriceElement = document.getElementById('total-price');
+            cartList.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${item.quantity} x ${item.name} - $${item.price * item.quantity}`;
+                cartList.appendChild(listItem);
+                total += item.price * item.quantity;
+            });
+            
+            totalPriceElement.textContent = `Total: $${total.toFixed(2)}`;
+        }
+        
+        function filterMenu() {
+            const searchTerm = document.getElementById('search-bar').value.toLowerCase();
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            menuItems.forEach(item => {
+                const itemName = item.querySelector('h3').textContent.toLowerCase();
+                if (itemName.includes(searchTerm)) {
+                    item.style.display = ''; // Show item
+                } else {
+                    item.style.display = 'none'; // Hide item
+                }
+            });
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            // Save the cart details to localStorage to access in cart.html
+            localStorage.setItem('cart', JSON.stringify(cart));
+            window.location.href = 'cart.html'; // Navigate to cart page
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

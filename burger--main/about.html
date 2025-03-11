@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Berger Hut - About</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    body {
+      background-image: url('public/about-image.jpg'); /* Adjust the path as necessary */
+      background-size: cover; /* Cover the entire page */
+      background-position: center; /* Center the image */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      margin: 0; /* Reset default margin */
+      font-family: Arial, sans-serif; /* Set font style */
+    }
+
+    .container {
+      padding: 5rem; /* Add some padding */
+      border-radius: 1rem; /* Optional: add rounded corners */
+      margin: 2rem; /* Optional: add margin to the container */
+      background-color: rgba(6, 5, 5, 0.9); /* White background with transparency */
+    }
+
+    .transparent-content {
+      color: #231d1d; /* Text color */
+      margin-bottom: 1rem; /* Space between paragraphs */
+      font-size: 1.5rem; /* Increase text size */
+      opacity: 0; /* Start as transparent */
+      transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
+    }
+
+    .paragraph {
+      background-color: rgba(247, 244, 244, 0.8); /* White background for each paragraph with transparency */
+      border-radius: 8px; /* Rounded corners */
+      padding: 2rem; /* Add padding */
+      margin: 3rem 0; /* Space between paragraphs */
+      display: flex; /* Use flexbox to align content */
+      align-items: center; /* Center the items vertically */
+      opacity: 0; /* Start as transparent */
+      transition: opacity 0.9s ease-in-out; /* Smooth transition for opacity */
+    }
+
+    .paragraph img {
+      max-width: 400px; /* Increase the max width for the images */
+      margin-right: 1rem; /* Space between image and text */
+      border-radius: 8px; /* Optional: add rounded corners to the image */
+      height: auto; /* Maintain the aspect ratio of the image */
+    }
+
+    /* Alternate alignment */
+    .left {
+      flex-direction: row; /* Image on the left */
+    }
+
+    .right {
+      flex-direction: row-reverse; /* Image on the right */
+    }
+
+    /* Additional styles for header and footer */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent header */
+      color: white;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 1rem;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: rgba(51, 51, 51, 0.8); /* Semi-transparent footer */
+      color: white;
+    }
+
+    /* Animation class */
+    .fade-in {
+      opacity: 1; /* Fully visible */
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="iconlogo.png" alt="Berger Hut Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="reservations.html">Reservations</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- About Section -->
+  <section class="about dark-theme">
+    <div class="container">
+      <h1 class="transparent-content">Welcome to Our Website</h1>
+
+      <div class="paragraph left transparent-content">
+        <img src="gallery1.jpg" alt="Image 1"> <!-- Replace with your image URL -->
+        <p>Welcome to Berger Hut, where every meal is crafted with love and care. Our journey began with a simple mission: to bring people together through delicious food and memorable experiences. Whether you are a regular visitor or new to our establishment, we are excited to share our culinary delights with you!</p>
+      </div>
+      
+      <div class="paragraph right transparent-content">
+        <img src="gallery2.jpg" alt="Image 2"> <!-- Replace with your image URL -->
+        <p>At Berger Hut, we pride ourselves on using only the freshest ingredients sourced from local markets. Our talented chefs work tirelessly to create mouth-watering dishes that reflect the essence of our culinary heritage. From appetizers to desserts, every bite tells a story of quality and tradition.</p>
+      </div>
+      
+      <div class="paragraph left transparent-content">
+        <img src="gallery3.jpg" alt="Image 3"> <!-- Replace with your image URL -->
+        <p>We understand the importance of a warm and inviting atmosphere. Our restaurant is designed to provide a cozy setting where friends and family can gather to enjoy great food and even better company. We strive to make every visit special, ensuring that our guests feel right at home.</p>
+      </div>
+      
+      <div class="paragraph right transparent-content">
+        <img src="gallery4.jpg" alt="Image 4"> <!-- Replace with your image URL -->
+        <p>Join us for special events and promotions throughout the year! From themed nights to festive celebrations, there's always something happening at Berger Hut. Follow us on social media to stay updated on our latest offerings and be part of our vibrant community.</p>
+      </div>
+      
+      <div class="paragraph left transparent-content">
+        <img src="gallery1.jpg" alt="Image 5"> <!-- Replace with your image URL -->
+        <p>At Berger Hut, we believe that every meal is an opportunity to create lasting memories. Our menu features a wide range of delicious dishes made from the freshest ingredients, tailored to satisfy every palate. Whether you’re dining with family, celebrating a special occasion, or enjoying a quiet evening, we invite you to experience our exceptional service and cozy atmosphere. Come visit us and let us make your day special!</p>
+      </div>
+      
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer-text">&copy; 2023 Berger Hut. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const paragraphs = document.querySelectorAll('.paragraph');
+    let index = 0;
+
+    function showNextParagraph() {
+      if (index < paragraphs.length) {
+        paragraphs[index].classList.add('fade-in'); // Add fade-in effect
+        index++;
+        setTimeout(showNextParagraph, 3000); // Wait for 3 seconds before showing the next paragraph
+      }
+    }
+
+    // Start the animation
+    showNextParagraph();
+  </script>
+
+</body>
+</html>

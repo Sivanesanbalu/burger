@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Registration - Berger Hut</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url("log.jpeg");
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      padding: 0px;
+      color: #110e0e;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .form-section {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      margin: 0 auto;
+      opacity: 0.9;
+      transition: transform 0.5s;
+    }
+
+    .form-section:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #000203;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      cursor: pointer;
+      padding: 10px;
+      flex: 1;
+      text-align: center;
+      background: #a258e8;
+      border-radius: 5px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .tab.active {
+      background: #d943c0;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin: 10px 0 5px;
+    }
+
+    input {
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border 0.3s;
+    }
+
+    input:focus {
+      border-color: #26384b;
+      outline: none;
+    }
+
+    button {
+      padding: 10px;
+      background: #ab2424;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background: #747f8a;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #1b0202;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .registration-info {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f3eaee;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="iconlogo.png" alt="Berger Hut Logo" style="width: 100px;">
+    </div>
+    <h1>Welcome to Berger Hut</h1>
+  </header>
+
+  <section class="form-section">
+    <div class="tabs">
+      <div class="tab active" id="loginTab">Login</div>
+      <div class="tab" id="registerTab">Register</div>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="form">
+      <label for="loginUsername">Username:</label>
+      <input type="text" id="loginUsername" required>
+      <label for="loginPassword">Password:</label>
+      <input type="password" id="loginPassword" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- Registration Form -->
+    <form id="registerForm" class="form hidden">
+      <label for="registerUsername">Username:</label>
+      <input type="text" id="registerUsername" required>
+      <label for="registerEmail">Email:</label>
+      <input type="email" id="registerEmail" required>
+      <label for="registerPassword">Password:</label>
+      <input type="password" id="registerPassword" required>
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="registration-info">
+      <h3>About Registration</h3>
+      
+      <p>Once registered, you can log in with your credentials.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2023 Berger Hut. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Toggle between login and registration forms
+    document.getElementById('loginTab').onclick = function() {
+      document.getElementById('loginForm').classList.remove('hidden');
+      document.getElementById('registerForm').classList.add('hidden');
+      this.classList.add('active');
+      document.getElementById('registerTab').classList.remove('active');
+    };
+
+    document.getElementById('registerTab').onclick = function() {
+      document.getElementById('registerForm').classList.remove('hidden');
+      document.getElementById('loginForm').classList.add('hidden');
+      this.classList.add('active');
+      document.getElementById('loginTab').classList.remove('active');
+    };
+
+    // Handle form submissions
+    document.getElementById('loginForm').onsubmit = function(event) {
+      event.preventDefault(); // Prevent form submission
+      // Here, add your login logic (e.g., check username/password)
+      // Simulate successful login
+      alert('Login successful!');
+      window.location.href = 'index.html'; // Redirect to home page
+    };
+
+    document.getElementById('registerForm').onsubmit = function(event) {
+      event.preventDefault(); // Prevent form submission
+      // Here, add your registration logic
+      // Simulate successful registration
+      alert('Registration successful!');
+      window.location.href = 'index.html'; // Redirect to home page
+    };
+  </script>
+</body>
+</html>

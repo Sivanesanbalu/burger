@@ -1,0 +1,336 @@
+
+    <style>
+        /* Reset some default styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6; /* Improved readability */
+            background-color: #080707; /* Set background to light grey */
+            color: #d26060; /* Dark text color */
+            transition: background-color 0.3s; /* Smooth background transition */
+        }
+
+        /* Header styles */
+        header {
+            background-color: #2c3e50; /* Dark blue background */
+            color: #ecf0f1; /* Light text color */
+            padding: 15px 20px; /* Padding around the header */
+            display: flex; /* Flexbox for logo and nav */
+            justify-content: space-between; /* Space between logo and nav */
+            align-items: center; /* Center items vertically */
+            position: sticky; /* Sticky header */
+            top: 0; /* Stick to the top */
+            z-index: 1000; /* Ensure it’s above other content */
+            transition: background-color 0.3s; /* Smooth background transition */
+        }
+
+        .logo img {
+            height: 50px; /* Logo height */
+        }
+
+        nav ul {
+            list-style-type: none; /* Remove bullet points */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            display: flex; /* Flexbox for horizontal layout */
+        }
+
+        nav ul li {
+            margin: 0 15px; /* Space between menu items */
+        }
+
+        nav a {
+            color: #ecf0f1; /* Light text color */
+            text-decoration: none; /* Remove underline */
+            transition: color 0.3s; /* Transition for hover effect */
+        }
+
+        nav a:hover {
+            color: #e74c3c; /* Change color on hover */
+        }
+
+        /* Contact Container */
+        .contact-container {
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Space between text and map */
+            padding: 80px 20px; /* Add some padding */
+            max-width: 1200px; /* Limit width */
+            margin: auto; /* Center the container */
+            transition: background-color 0.3s; /* Smooth background transition */
+        }
+
+        /* Text and Map styles */
+        .contact-text {
+            flex: 1; /* Take available space */
+            margin-right: 10px; /* Space between text and map */
+        }
+
+        .map-container {
+            flex: 1; /* Take available space */
+            max-width: 1000px; /* Limit the width of the map */
+            height: 500px; /* Set height for the map */
+        }
+
+        /* Google Map iframe styling */
+        .map-container iframe {
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            border: 0; /* Remove border */
+            border-radius: 8px; /* Rounded corners */
+        }
+
+        /* Contact Info Section */
+        .contact-info {
+            padding: 50px 20px; /* Add padding */
+            background-color: #ecf0f1; /* Light grey background */
+            border-top: 1px solid #bdc3c7; /* Top border */
+            max-width: 800px; /* Limit width */
+            margin: auto; /* Center the contact info section */
+            border-radius: 8px; /* Rounded corners */
+            text-align: center; /* Center text */
+        }
+
+        .contact-info h2 {
+            margin-bottom: 20px; /* Space below heading */
+            color: #2c3e50; /* Darker color for headings */
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            padding: 80px 30px; /* Add padding */
+            background-color: #ecf0f1; /* Light grey background */
+            border-top: 8px solid #bdc3c7; /* Top border */
+            max-width: 800px; /* Limit width */
+            margin: auto; /* Center the feedback section */
+            border-radius: 8px; /* Rounded corners */
+            margin-top: 20px; /* Space above the feedback section */
+            transition: background-color 0.3s; /* Smooth background transition */
+        }
+
+        .feedback-section h2 {
+            margin-bottom: 20px; /* Space below heading */
+            color: #2c3e50; /* Darker color for headings */
+            text-align: center; /* Center the heading */
+        }
+
+        .feedback-form {
+            display: flex; /* Flexbox layout for form */
+            flex-direction: column; /* Vertical layout */
+            background: white; /* White background for form */
+            padding: 20px; /* Padding for the form */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        .feedback-form input,
+        .feedback-form textarea {
+            margin-bottom: 15px; /* Space below input and textarea */
+            padding: 15px; /* Padding inside input fields */
+            border: 1px solid #ccc; /* Border for input fields */
+            border-radius: 4px; /* Rounded corners */
+            font-size: 14px; /* Font size */
+            font-family: inherit; /* Inherit font family */
+            transition: border-color 0.3s; /* Transition for border color */
+        }
+
+        .feedback-form input:focus,
+        .feedback-form textarea:focus {
+            border-color: #e74c3c; /* Change border color on focus */
+            outline: none; /* Remove outline */
+        }
+
+        .feedback-form button {
+            padding: 15px; /* Padding for button */
+            background-color: #e74c3c; /* Button color */
+            color: white; /* Button text color */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-size: 16px; /* Font size for button */
+            transition: background 0.3s; /* Transition for hover effect */
+        }
+
+        .feedback-form button:hover {
+            background-color: #c0392b; /* Darken button on hover */
+        }
+
+        .feedback-list {
+            margin-top: 30px; /* Space above feedback list */
+            max-height: 200px; /* Limit height */
+            overflow-y: auto; /* Scroll if overflow */
+            background-color: white; /* Background for feedback list */
+            border: 1px solid #ccc; /* Border for feedback list */
+            border-radius: 4px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+            padding: 10px; /* Padding for feedback list */
+        }
+
+        .feedback-item {
+            padding: 10px; /* Padding for each feedback item */
+            border-bottom: 1px solid #eee; /* Divider between items */
+            transition: background 0.3s; /* Transition for hover effect */
+        }
+
+        .feedback-item:last-child {
+            border-bottom: none; /* No border for last item */
+        }
+
+        .feedback-item:hover {
+            background-color: rgba(0, 0, 0, 0.05); /* Light hover effect */
+        }
+
+        /* Get in Touch Section */
+        .get-in-touch {
+            padding: 70px 200px; /* Add padding */
+            background-color: #302741; /* Dark blue background */
+            border-top: 1px solid #1f5981; /* Top border */
+            max-width: 800px; /* Limit width */
+            margin: auto; /* Center the section */
+            border-radius: 8px; /* Rounded corners */
+            text-align: center; /* Center text */
+            color: white; /* White text color */
+            margin-top: 20px; /* Space above the section */
+            transition: background-color 0.3s; /* Smooth background transition */
+        }
+
+        .get-in-touch h2 {
+            margin-bottom: 20px; /* Space below heading */
+        }
+
+        .get-in-touch p {
+            margin-bottom: 10px; /* Space below paragraph */
+        }
+
+        .get-in-touch button {
+            padding: 10px 20px; /* Padding for button */
+            background-color: #ecf0f1; /* Light button background */
+            color: black; /* Button text color */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background 0.3s; /* Transition for hover effect */
+        }
+
+        .get-in-touch button:hover {
+            background-color: #bdc3c7; /* Darken button on hover */
+        }
+
+        footer {
+            background-color: #2c3e50; /* Dark footer */
+            color: white; /* White text in footer */
+            text-align: center; /* Center text */
+            padding: 20px 0; /* Padding for footer */
+            position: relative; /* Relative positioning */
+            bottom: 0; /* Stick to bottom */
+            width: 100%; /* Full width */
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column; /* Stack text and map on small screens */
+            }
+
+            .contact-text {
+                margin-right: 0; /* Remove right margin */
+                margin-bottom: 20px; /* Space below text on small screens */
+            }
+
+            .get-in-touch {
+                padding: 40px 20px; /* Padding adjustment for small screens */
+            }
+
+            .contact-info {
+                padding: 30px 20px; /* Padding adjustment for small screens */
+            }
+
+            .feedback-section {
+                padding: 40px 20px; /* Padding adjustment for small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="burger1.jpg" alt="Berger Hut Logo"> <!-- Add your logo path here -->
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="reservations.html">Reservations</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="contact-container">
+        <div class="contact-text">
+            <h1>Contact Us</h1>
+            <p>If you have any questions or need assistance, feel free to reach out!</p>
+            <p><strong>Email:</strong> rohiniramesh2005@gmail.com</p>
+            <p><strong>Email:</strong> vijayalakshminarayanamoorthy05@gmail.com</p>
+            <p><strong>Email:</strong> apsiva69@gmail.com</p>
+            <p><strong>Phone:</strong> +123 456 7890</p>
+        </div>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.9755092722885!2d144.953735615907!3d-37.81520797975123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0bfa4f81%3A0x9e6df37cc14591a5!2sBerger%20Hut!5e0!3m2!1sen!2sau!4v1626267345322!5m2!1sen!2sau" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <div class="contact-info">
+        <h2>Our Address</h2>
+        <p>123 Berger St, Food Town, FT 12345</p>
+        <h2>Operating Hours</h2>
+        <p>Monday - Friday: 8:00 AM - 10:00 PM</p>
+        <p>Saturday - Sunday: 9:00 AM - 11:00 PM</p>
+    </div>
+
+    <div class="feedback-section">
+        <h2>Your Feedback</h2>
+        <form class="feedback-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="5" placeholder="Your Feedback" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="feedback-list">
+            <!-- Feedback list will be populated here -->
+        </div>
+    </div>
+
+    <div class="get-in-touch">
+        <h2>Get in Touch</h2>
+        <p>Join our newsletter for updates!</p>
+        <button>Subscribe</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Berger Hut. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Feedback form submission handling
+        document.querySelector('.feedback-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            const name = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            const feedback = this.querySelector('textarea').value;
+
+            // Create feedback item
+            const feedbackItem = document.createElement('div');
+            feedbackItem.className = 'feedback-item';
+            feedbackItem.innerHTML = `<strong>${name}</strong> (${email})<p>${feedback}</p>`;
+
+            // Add feedback item to the feedback list
+            document.querySelector('.feedback-list').appendChild(feedbackItem);
+
+            // Reset form fields
+            this.reset();
+        });
+    </script>
+</body>
+</html>
